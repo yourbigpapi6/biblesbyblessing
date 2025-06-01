@@ -34,7 +34,7 @@ function addToCart(id) {
 document.addEventListener("DOMContentLoaded", function () {
   const container = document.getElementById("product-container");
 
-  fetch("https://itca-example-advanced-website-backend.onrender.com/api/products")
+  fetch("https://biblesbyblessing-backend.onrender.com/api/products")
     .then(res => res.json())
     .then(products => {
       renderProducts(products);
