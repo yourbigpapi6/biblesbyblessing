@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const card = document.createElement("div");
       card.className = "product-card";
       card.innerHTML = `
-        <img src="${product.image}" alt="${product.name}">
+        <img src="https://biblesbyblessing-backend.onrender.com/${product.image}" alt="${product.name}">
         <h3>${product.name}</h3>
         <p>${product.description}</p>
         <p><strong>R${product.price.toFixed(2)}</strong></p>
