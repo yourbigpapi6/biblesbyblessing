@@ -1,72 +1,46 @@
-/* ===== Root Colors ===== */
 :root {
   --bg: #000000;
-  --text: #f0f0f0;
-  --card-bg: #111111;
+  --text: #f9f9f9;
+  --card-bg: #1a1a1a;
   --accent: #00ffff;
-}
-
-/* ===== Global Styles ===== */
-* {
-  box-sizing: border-box;
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 body {
   margin: 0;
-  font-family: 'Inter', 'Segoe UI', sans-serif;
-  line-height: 1.6;
-  font-size: 16px;
+  font-family: Arial, sans-serif;
   background-color: var(--bg);
   color: var(--text);
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* ===== Header ===== */
 header {
   padding: 1em 2em;
   background: var(--card-bg);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  flex-wrap: wrap;
+  border-bottom: 1px solid #333;
 }
 
-/* ===== Navbar ===== */
 .nav-menu {
   list-style: none;
   display: flex;
-  gap: 1.5em;
+  gap: 1.2em;
   padding: 0;
   margin: 0;
-  flex-wrap: wrap;
 }
 
 .nav-menu a {
   color: var(--text);
   text-decoration: none;
-  font-weight: 600;
-  position: relative;
+  font-weight: bold;
+  transition: color 0.3s;
 }
 
-.nav-menu a::after {
-  content: "";
-  position: absolute;
-  width: 0%;
-  height: 2px;
-  background: var(--accent);
-  bottom: -3px;
-  left: 0;
-  transition: width 0.3s ease;
+.nav-menu a:hover {
+  color: var(--accent);
 }
 
-.nav-menu a:hover::after {
-  width: 100%;
-}
-
-/* ===== Main Grid ===== */
-main {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minm
+main#product-container {
+  display: gri
