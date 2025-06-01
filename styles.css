@@ -24,11 +24,6 @@ header {
   border-bottom: 1px solid #333;
 }
 
-.logo img {
-  height: 60px;
-  max-width: 180px;
-  object-fit: contain;
-}
 
 /* Navigation */
 .nav-menu {
@@ -37,6 +32,7 @@ header {
   gap: 1.2em;
   padding: 0;
   margin: 0;
+  justify-content: center;
 }
 
 .nav-menu a {
