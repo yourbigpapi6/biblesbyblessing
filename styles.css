@@ -124,11 +124,6 @@ footer {
     align-items: flex-start;
   }
 
-  .logo img {
-    height: 50px;
-    max-width: 140px;
-  }
-
   .nav-menu {
     flex-wrap: wrap;
     gap: 1em;
