@@ -1,27 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <center><img src="bible.png" width="300" height="auto"></center>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shopping Cart</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header>
-    <h3>Shopping Cart</h3>
-    <nav>
-      <a href="index.html">← Back to Store</a>
-    </nav>
+
+  <!-- Logo -->
+  <section class="hero" style="padding-bottom: 0.5em;">
+    <img src="bible.png" class="logo-3d" alt="Logo" />
+  </section>
+
+  <!-- Navigation (matching index.html style) -->
+  <header class="main-header">
+    <div class="nav-container">
+      <ul class="nav-menu">
+        <li><a href="index.html">← Back to Store</a></li>
+      </ul>
+    </div>
   </header>
 
-  <main id="cart-container"></main>
+  <!-- Cart Container -->
+  <main id="cart-container" style="max-width: 800px; margin: auto; padding: 2em;"></main>
 
-  <footer>
-    <button onclick="checkout()">Proceed to Checkout</button>
+  <!-- Footer with Buttons -->
+  <footer style="text-align: center; margin-top: 2em;">
+    <button onclick="checkout()" style="margin: 1em;">Proceed to Checkout</button>
     <button onclick="clearCart()">Clear Cart</button>
   </footer>
 
+  <!-- Script -->
   <script>
     const BACKEND_URL = "https://biblesbyblessing-backend.onrender.com";
     const cartContainer = document.getElementById("cart-container");
@@ -35,33 +45,35 @@
       cartContainer.innerHTML = "";
 
       if (cart.length === 0) {
-        cartContainer.innerHTML = "<p>Your cart is empty.</p>";
+        cartContainer.innerHTML = "<p style='text-align:center;'>🛒 Your cart is empty.</p>";
         return;
       }
 
       let total = 0;
 
-      cart.forEach((item, index) => {
+      cart.forEach((item) => {
         const product = products.find(p => p.id === item.id);
         const subtotal = product.price * item.quantity;
         total += subtotal;
 
         const div = document.createElement("div");
+        div.className = "product-card";
+        div.style.marginBottom = "1em";
         div.innerHTML = `
-          <h3>${product.name}</h3>
-          <p>Price: R${product.price.toFixed(2)}</p>
-          <label>
+          <h3 style="color: #f58ad1;">${product.name}</h3>
+          <p>Price: <strong>R${product.price.toFixed(2)}</strong></p>
+          <label style="display:block; margin: 0em 0;">
             Quantity:
             <input type="number" min="1" value="${item.quantity}" onchange="updateQuantity('${item.id}', this.value)">
           </label>
-          <p>Subtotal: R${subtotal.toFixed(2)}</p>
-          <hr>
+          <p style="color: #ffd700;">Subtotal: R${subtotal.toFixed(2)}</p>
+          <hr style="border: 1px solid var(--accent); margin-top: 1em;">
         `;
         cartContainer.appendChild(div);
       });
 
       const summary = document.createElement("div");
-      summary.innerHTML = `<h2>Total: R${total.toFixed(2)}</h2>`;
+      summary.innerHTML = `<h2 style="text-align:center; color:white;">Total: R${total.toFixed(2)}</h2>`;
       cartContainer.appendChild(summary);
     }
 
