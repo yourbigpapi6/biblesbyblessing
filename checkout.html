@@ -1,69 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-      <center><img src="bible.png" width="300" height="auto"></center>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Checkout</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
+  <style>
+  body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: radial-gradient(circle at top, #1b0a15 0%, #000000 100%);
+  color: var(--text);
+}
+    .logo {
+      text-align: center;
+      padding-top: 0em;
+    }
+
+    .logo img {
+      width: 800px;
+    }
+
+header {
+  background: #290f24;
+  padding: 1em 2em;
+  text-align: center;
+  border-bottom: 1px solid #333;
+}
+
+header h3 {
+  margin: 0;
+  font-size: 1.5em;
+  color: #fdfdfd;
+}
+
+header nav {
+  margin-top: 0.5em;
+}
+
+.back-link {
+  font-size: 1em;
+  color: #fff;
+}
+
+.back-link:hover {
+  color: #f58ad1;
+}
+
+ main {
+      width: 400px;
+      margin: 1em auto;
+      padding: 2em;
+      background: rgba(68, 55, 55, 0.03);
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(19, 3, 13, 0.301);
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 1.2em;
+      font-size: 1em;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      padding: 0.8em;
+      background: #1a1a1a;
+      color: #fff;
+      border: 1px solid #333;
+      border-radius: 8px;
+      font-size: 1em;
+    }
+
+    textarea {
+      height: 120px;
+      resize: vertical;
+    }
+
+    button[type="submit"] {
+      margin-top: 1em;
+      background-color: #c0248c;
+      color: #000;
+      font-weight: bold;
+      padding: 0.8em 2.4em;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    button[type="submit"]:hover {
+      background: #aa0f0f;
+      transform: scale(1.05);
+    }
+
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Checkout</h1>
-    <nav><a href="index.html">← Back to Store</a></nav>
+  <div class="logo">
+    <img src="bible.png" alt="Logo">
+  </div>
+
+ <header class="main-header">
+    <div class="nav-container">
+      <ul class="nav-menu">
+        <li><a href="index.html">← Back to Store</a></li>
+      </ul>
+    </div>
   </header>
 
   <main>
     <form id="checkout-form">
-      <label>Name: <input type="text" name="name" required></label><br>
-      <label>Email: <input type="email" name="email" required></label><br>
-      <label>Address: <textarea name="address" required></textarea></label><br>
+      <label>Name:
+        <input type="text" name="name" required placeholder="Full Name">
+      </label>
+
+      <label>Email:
+        <input type="email" name="email" required placeholder="email@example.com">
+      </label>
+
+      <label>Address:
+        <textarea name="address" required placeholder="Street, City, ZIP Code"></textarea>
+      </label>
+
       <button type="submit">Confirm Order</button>
     </form>
   </main>
 
   <script>
-document.addEventListener("DOMContentLoaded", function () {
-  const BACKEND_URL = "https://biblesbyblessing-backend.onrender.com";
-  const form = document.getElementById("checkout-form");
+    document.addEventListener("DOMContentLoaded", function () {
+      const BACKEND_URL = "https://biblesbyblessing-backend.onrender.com";
+      const form = document.getElementById("checkout-form");
 
-  if (!form) return; // prevent error if form isn't found
+      if (!form) return;
 
-  form.addEventListener("submit", function(e) {
-    e.preventDefault();
+      form.addEventListener("submit", function(e) {
+        e.preventDefault();
 
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    if (cart.length === 0) {
-      alert("Your cart is empty.");
-      return;
-    }
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        if (cart.length === 0) {
+          alert("Your cart is empty.");
+          return;
+        }
 
-    const formData = {
-      name: form.querySelector("input[name='name']").value,
-      email: form.querySelector("input[name='email']").value,
-      address: form.querySelector("textarea[name='address']").value,
-      cartItems: cart
-    };
+        const formData = {
+          name: form.querySelector("input[name='name']").value,
+          email: form.querySelector("input[name='email']").value,
+          address: form.querySelector("textarea[name='address']").value,
+          cartItems: cart
+        };
 
-    fetch(`${BACKEND_URL}/api/sale`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData)
-    })
-    .then(res => res.json())
-    .then(data => {
-      alert("Order confirmed! " + (data.message || ""));
-      localStorage.removeItem("cart");
-      window.location.href = "index.html";
-    })
-    .catch(err => {
-      console.error("Checkout failed:", err);
-      alert("Something went wrong during checkout.");
+        fetch(`${BACKEND_URL}/api/sale`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData)
+        })
+        .then(res => res.json())
+        .then(data => {
+          alert("Order confirmed! " + (data.message || ""));
+          localStorage.removeItem("cart");
+          window.location.href = "index.html";
+        })
+        .catch(err => {
+          console.error("Checkout failed:", err);
+          alert("Something went wrong during checkout.");
+        });
+      });
     });
-  });
-});
-</script>
-
-
+  </script>
 </body>
 </html>
