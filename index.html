@@ -9,35 +9,37 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- Logo -->
-  <div style="text-align:center; padding-top: 1em;">
-    <img src="bible.png" width="300" alt="Bibles by Blessing Logo">
-  </div>
+  <!-- Hero Section with Logo Only -->
+  <section class="hero">
+    <div class="hero-content">
+      <img src="bible.png" width="400" alt="Bibles by Blessing Logo" class="logo-3d">
+    </div>
+  </section>
 
-  <!-- Header with Navbar -->
-  <header>
-  <nav>
-    <ul class="nav-menu">
-      <li><a href="#" data-category="Bibles">Bibles</a></li>
-      <li><a href="#" data-category="Notebooks">Notebooks</a></li>
-      <li><a href="#" data-category="Candles">Candles</a></li>
-      <li><a href="#" data-category="Wall Art">Wall Art</a></li>
-      <li><a href="cart.html">🛒 Cart</a></li>
-    </ul>
-  </nav>
-</header>
+  <!-- Navigation Bar -->
+  <header class="main-header">
+    <nav class="nav-container">
+      <ul class="nav-menu">
+        <li><a href="#" data-category="Bibles">Bibles</a></li>
+        <li><a href="#" data-category="Notebooks">Notebooks</a></li>
+        <li><a href="#" data-category="Candles">Candles</a></li>
+        <li><a href="#" data-category="Wall Art">Wall Art</a></li>
+        <li><a href="cart.html">🛒 Cart</a></li>
+      </ul>
+    </nav>
+  </header>
 
-  <!-- Product Grid -->
-  <main id="product-container">
-    <!-- Products will be loaded here by script.js -->
+  <!-- Product Showcase -->
+  <main id="product-container" class="animated-grid">
+    <!-- Products dynamically added via script.js -->
   </main>
 
   <!-- Footer -->
   <footer>
-    <p>© 2025 Bibles by Blessing</p>
+    <p>© 2025 Bibles by Blessing. All rights reserved.</p>
   </footer>
 
   <!-- Scripts -->
   <script src="script.js"></script>
 </body>
-</html>           
+</html>
