@@ -5,11 +5,14 @@ function addToCart(id) {
     .then(res => res.json())
     .then(products => {
       const product = products.find(p => p.id === id);
-      if (!product) return alert("Product not found");
+      if (!product) {
+        alert("Product not found.");
+        return;
+      }
 
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
       const existing = cart.find(item => item.id === id);
+
       if (existing) {
         existing.quantity += 1;
       } else {
@@ -22,19 +25,19 @@ function addToCart(id) {
       }
 
       localStorage.setItem("cart", JSON.stringify(cart));
-      alert(`${product.name} added to cart`);
+      alert(`✅ ${product.name} added to cart!`);
     })
     .catch(err => {
       console.error("Error adding to cart:", err);
-      alert("Could not add to cart.");
+      alert("🚫 Could not add to cart.");
     });
 }
 
-// ⬇️ DOMContentLoaded handles rendering only
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("product-container");
+  const BACKEND_URL = "https://biblesbyblessing-backend.onrender.com";
 
-  fetch("https://biblesbyblessing-backend.onrender.com/api/products")
+  fetch(`${BACKEND_URL}/api/products`)
     .then(res => res.json())
     .then(products => {
       renderProducts(products);
@@ -42,11 +45,17 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     .catch(error => {
       console.error("Failed to load products:", error);
-      container.innerHTML = "<p>Could not load product data.</p>";
+      container.innerHTML = "<p style='text-align:center;'>🚫 Could not load product data.</p>";
     });
 
   function renderProducts(productList) {
     container.innerHTML = "";
+
+    if (productList.length === 0) {
+      container.innerHTML = "<p style='text-align:center;'>No products found in this category.</p>";
+      return;
+    }
+
     productList.forEach(product => {
       const card = document.createElement("div");
       card.className = "product-card";
